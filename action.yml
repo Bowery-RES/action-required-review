@@ -1,6 +1,11 @@
 name: Required review
 description: Check that a PR has reviews from required teams.
 inputs:
+  skipOnLabels:
+    description: >
+      Allows to specify an array of labels to skip the check.
+      If some of these labels are set for a PR the check submits 'success' status.
+    required: false
   requirements:
     description: >
       Requirements, as a string containing YAML.
