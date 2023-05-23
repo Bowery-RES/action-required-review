@@ -16332,9 +16332,9 @@ function wrappy (fn, cb) {
 /***/ 9234:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const core = __nccwpck_require__( 2186 );
-const github = __nccwpck_require__( 5438 );
-const { WError } = __nccwpck_require__( 8345 );
+const core = __nccwpck_require__(2186);
+const github = __nccwpck_require__(5438);
+const { WError } = __nccwpck_require__(8345);
 
 /**
  * Fetch the labels of a PR.
@@ -16342,23 +16342,23 @@ const { WError } = __nccwpck_require__( 8345 );
  * @returns {string[]} Labels.
  */
 async function fetchLabels() {
-	const octokit = github.getOctokit( core.getInput( 'token', { required: true } ) );
+	const octokit = github.getOctokit(core.getInput('token', { required: true }));
 
 	const owner = github.context.payload.repository.owner.login;
 	const repo = github.context.payload.repository.name;
 	const prNumber = github.context.payload.pull_request.number;
 
 	try {
-        const { data } = await octokit.pulls.get({
-            pull_number: prNumber,
-            owner,
-            repo,
-          });
-          
-          return data.labels.map((label) => label.name);
-	} catch ( error ) {
+		const { data } = await octokit.pulls.get({
+			pull_number: prNumber,
+			owner,
+			repo,
+		});
+
+		return data.labels.map((label) => label.name);
+	} catch (error) {
 		throw new WError(
-			`Failed to query ${ owner }/${ repo } PR #${ pr } labels from GitHub`,
+			`Failed to query ${owner}/${repo} PR #${prNumber} labels from GitHub`,
 			error,
 			{}
 		);
