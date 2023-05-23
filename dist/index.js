@@ -16360,7 +16360,8 @@ async function fetchLabels() {
 
 		return response.data.labels.map((label) => label.name);
 	} catch (error) {
-		core.info(err.stack);
+		core.info(error.message);
+		core.info(error.stack);
 		throw new WError(
 			`Failed to query ${owner}/${repo} PR #${prNumber} labels from GitHub`,
 			error,
