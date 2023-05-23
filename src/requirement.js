@@ -2,7 +2,6 @@ const assert = require( 'assert' );
 const core = require( '@actions/core' );
 const { SError } = require( 'error' );
 const picomatch = require( 'picomatch' );
-
 const fetchTeamMembers = require( './team-members.js' );
 
 class RequirementError extends SError {}
@@ -133,6 +132,7 @@ class Requirement {
 	 * @param {object} config - Object config
 	 * @param {string[]|string} config.paths - Paths this requirement applies to. Either an array of picomatch globs, or the string "unmatched".
 	 * @param {Array} config.teams - Team reviews requirements.
+	 * @param {boolean} config.consume - Whether matched paths should be ignored by later rules.
 	 */
 	constructor( config ) {
 		this.name = config.name || 'Unnamed requirement';
@@ -141,24 +141,57 @@ class Requirement {
 			this.pathsFilter = null;
 		} else if (
 			Array.isArray( config.paths ) &&
+			config.paths.length > 0 &&
 			config.paths.every( v => typeof v === 'string' )
 		) {
-			this.pathsFilter = picomatch( config.paths, { dot: true } );
-		} else {
-			throw new RequirementError( 'Paths must be an array of strings, or the string "unmatched".', {
-				config: config,
+			// picomatch doesn't combine multiple negated patterns in a way that makes sense here: `!a` and `!b` will pass both `a` and `b`
+			// because `a` matches `!b` and `b` matches `!a`. So instead we have to handle the negation ourself: test the (non-negated) patterns in order,
+			// with the last match winning. If none match, the opposite of the first pattern's negation is what we need.
+			const filters = config.paths.map( path => {
+				if ( path.startsWith( '!' ) ) {
+					return {
+						negated: true,
+						filter: picomatch( path.substring( 1 ), { dot: true, nonegate: true } ),
+					};
+				}
+				return {
+					negated: false,
+					filter: picomatch( path, { dot: true } ),
+				};
 			} );
+			const first = filters.shift();
+			this.pathsFilter = v => {
+				let ret = first.filter( v ) ? ! first.negated : first.negated;
+				for ( const filter of filters ) {
+					if ( filter.filter( v ) ) {
+						ret = ! filter.negated;
+					}
+				}
+				return ret;
+			};
+		} else {
+			throw new RequirementError(
+				'Paths must be a non-empty array of strings, or the string "unmatched".',
+				{
+					config: config,
+				}
+			);
 		}
 
 		this.reviewerFilter = buildReviewerFilter( config, { 'any-of': config.teams }, '  ' );
+		this.consume = !! config.consume;
 	}
 
+	// eslint-disable-next-line jsdoc/require-returns, jsdoc/require-returns-check -- Doesn't support documentation of object structure.
 	/**
 	 * Test whether this requirement applies to the passed paths.
 	 *
 	 * @param {string[]} paths - Paths to test against.
-	 * @param {string[]} matchedPaths - Paths that have already been matched. Will be modified if true is returned.
-	 * @returns {boolean} Whether the requirement applies.
+	 * @param {string[]} matchedPaths - Paths that have already been matched.
+	 * @returns {object} _ Results object.
+	 * @returns {boolean} _.applies Whether the requirement applies.
+	 * @returns {string[]} _.matchedPaths New value for `matchedPaths`.
+	 * @returns {string[]} _.paths New value for `paths`.
 	 */
 	appliesToPaths( paths, matchedPaths ) {
 		let matches;
@@ -171,14 +204,24 @@ class Requirement {
 			}
 		}
 
-		if ( matches.length !== 0 ) {
+		const ret = {
+			applies: matches.length !== 0,
+			matchedPaths,
+			paths,
+		};
+
+		if ( ret.applies ) {
 			core.info( 'Matches the following files:' );
 			matches.forEach( m => core.info( `   - ${ m }` ) );
-			matchedPaths.push( ...matches.filter( p => ! matchedPaths.includes( p ) ) );
-			matchedPaths.sort();
+			ret.matchedPaths = [ ...new Set( [ ...matchedPaths, ...matches ] ) ].sort();
+
+			if ( this.consume ) {
+				core.info( 'Consuming matched files!' );
+				ret.paths = ret.paths.filter( p => ! matches.includes( p ) );
+			}
 		}
 
-		return matches.length !== 0;
+		return ret;
 	}
 
 	/**
