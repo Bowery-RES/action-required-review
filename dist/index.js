@@ -16350,10 +16350,13 @@ async function fetchLabels() {
 
 	try {
 		const response = await octokit.pulls.get({
-			pull_number: prNumber,
 			owner: owner,
 			repo: repo,
+			pull_number: prNumber,
 		});
+		console.log(response);
+		console.log(response.data);
+		console.log(response.data.labels);
 
 		return response.data.labels.map((label) => label.name);
 	} catch (error) {
