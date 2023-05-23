@@ -20,14 +20,9 @@ async function fetchLabels() {
 			repo: repo,
 			pull_number: prNumber,
 		});
-		core.info(response);
-		core.info(response.data);
-		core.info(response.data.labels);
 
 		return response.data.labels.map((label) => label.name);
 	} catch (error) {
-		core.info(error.message);
-		core.info(error.stack);
 		throw new WError(
 			`Failed to query ${owner}/${repo} PR #${prNumber} labels from GitHub`,
 			error,
