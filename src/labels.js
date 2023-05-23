@@ -17,8 +17,8 @@ async function fetchLabels() {
 	try {
 		const { data } = await octokit.pulls.get({
 			pull_number: prNumber,
-			owner,
-			repo,
+			owner: owner,
+			repo: repo,
 		});
 
 		return data.labels.map((label) => label.name);
