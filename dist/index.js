@@ -16349,13 +16349,13 @@ async function fetchLabels() {
 	const prNumber = github.context.payload.pull_request.number;
 
 	try {
-		const { data } = await octokit.pulls.get({
+		const response = await octokit.pulls.get({
 			pull_number: prNumber,
 			owner: owner,
 			repo: repo,
 		});
 
-		return data.labels.map((label) => label.name);
+		return response.data.labels.map((label) => label.name);
 	} catch (error) {
 		throw new WError(
 			`Failed to query ${owner}/${repo} PR #${prNumber} labels from GitHub`,
