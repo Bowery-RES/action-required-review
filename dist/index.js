@@ -16349,7 +16349,7 @@ async function fetchLabels() {
 	const prNumber = github.context.payload.pull_request.number;
 
 	try {
-		const response = await octokit.pulls.get({
+		const response = await octokit.rest.pulls.get({
 			owner: owner,
 			repo: repo,
 			pull_number: prNumber,
