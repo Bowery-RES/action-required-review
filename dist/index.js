@@ -1125,11 +1125,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getApiBaseUrl = exports.getProxyAgent = exports.getAuthString = void 0;
-<<<<<<< HEAD
 const httpClient = __importStar(__nccwpck_require__(6255));
-=======
-const httpClient = __importStar(__nccwpck_require__(9925));
->>>>>>> 4f12142 (Updated build dir)
 function getAuthString(token, options) {
     if (!token && !options.auth) {
         throw new Error('Parameter token or opts.auth is required');
@@ -1214,13 +1210,8 @@ exports.getOctokitOptions = getOctokitOptions;
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ 5526:
 /***/ (function(__unused_webpack_module, exports) {
-=======
-/***/ 9925:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
->>>>>>> 4f12142 (Updated build dir)
 
 "use strict";
 
@@ -1234,7 +1225,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-<<<<<<< HEAD
 exports.PersonalAccessTokenCredentialHandler = exports.BearerCredentialHandler = exports.BasicCredentialHandler = void 0;
 class BasicCredentialHandler {
     constructor(username, password) {
@@ -1348,12 +1338,6 @@ const http = __importStar(__nccwpck_require__(3685));
 const https = __importStar(__nccwpck_require__(5687));
 const pm = __importStar(__nccwpck_require__(9835));
 const tunnel = __importStar(__nccwpck_require__(4294));
-=======
-const http = __nccwpck_require__(8605);
-const https = __nccwpck_require__(7211);
-const pm = __nccwpck_require__(6443);
-let tunnel;
->>>>>>> 4f12142 (Updated build dir)
 var HttpCodes;
 (function (HttpCodes) {
     HttpCodes[HttpCodes["OK"] = 200] = "OK";
@@ -1807,16 +1791,8 @@ class HttpClient {
         if (this.requestOptions) {
             maxSockets = this.requestOptions.maxSockets || http.globalAgent.maxSockets;
         }
-<<<<<<< HEAD
         // This is `useProxy` again, but we need to check `proxyURl` directly for TypeScripts's flow analysis.
         if (proxyUrl && proxyUrl.hostname) {
-=======
-        if (useProxy) {
-            // If using proxy, need tunnel
-            if (!tunnel) {
-                tunnel = __nccwpck_require__(4294);
-            }
->>>>>>> 4f12142 (Updated build dir)
             const agentOptions = {
                 maxSockets,
                 keepAlive: this._keepAlive,
@@ -1934,11 +1910,7 @@ const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCa
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ 9835:
-=======
-/***/ 6443:
->>>>>>> 4f12142 (Updated build dir)
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -4390,15 +4362,9 @@ exports.request = request;
 /***/ 3682:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-<<<<<<< HEAD
 var register = __nccwpck_require__(4670);
 var addHook = __nccwpck_require__(5549);
 var removeHook = __nccwpck_require__(6819);
-=======
-var register = __nccwpck_require__(4670)
-var addHook = __nccwpck_require__(5549)
-var removeHook = __nccwpck_require__(6819)
->>>>>>> 4f12142 (Updated build dir)
 
 // bind with array of arguments: https://stackoverflow.com/a/21792913
 var bind = Function.bind;
@@ -9279,20 +9245,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-<<<<<<< HEAD
 var Stream = _interopDefault(__nccwpck_require__(2781));
 var http = _interopDefault(__nccwpck_require__(3685));
 var Url = _interopDefault(__nccwpck_require__(7310));
 var whatwgUrl = _interopDefault(__nccwpck_require__(8665));
 var https = _interopDefault(__nccwpck_require__(5687));
 var zlib = _interopDefault(__nccwpck_require__(9796));
-=======
-var Stream = _interopDefault(__nccwpck_require__(2413));
-var http = _interopDefault(__nccwpck_require__(8605));
-var Url = _interopDefault(__nccwpck_require__(8835));
-var https = _interopDefault(__nccwpck_require__(7211));
-var zlib = _interopDefault(__nccwpck_require__(8761));
->>>>>>> 4f12142 (Updated build dir)
 
 // Based on https://github.com/tmpvar/jsdom/blob/aa85b2abf07766ff7bf5c1f6daafb3726f2f2db5/lib/jsdom/living/blob.js
 
@@ -9443,11 +9401,7 @@ FetchError.prototype.name = 'FetchError';
 
 let convert;
 try {
-<<<<<<< HEAD
 	convert = (__nccwpck_require__(2877).convert);
-=======
-	convert = __nccwpck_require__(2877).convert;
->>>>>>> 4f12142 (Updated build dir)
 } catch (e) {}
 
 const INTERNALS = Symbol('Body internals');
@@ -10429,16 +10383,12 @@ Object.defineProperty(Response.prototype, Symbol.toStringTag, {
 });
 
 const INTERNALS$2 = Symbol('Request internals');
-<<<<<<< HEAD
 const URL = Url.URL || whatwgUrl.URL;
-=======
->>>>>>> 4f12142 (Updated build dir)
 
 // fix an issue where "format", "parse" aren't a named export for node <10
 const parse_url = Url.parse;
 const format_url = Url.format;
 
-<<<<<<< HEAD
 /**
  * Wrapper around `new URL` to handle arbitrary URLs
  *
@@ -10459,8 +10409,6 @@ function parseURL(urlStr) {
 	return parse_url(urlStr);
 }
 
-=======
->>>>>>> 4f12142 (Updated build dir)
 const streamDestructionSupported = 'destroy' in Stream.Readable.prototype;
 
 /**
@@ -10497,7 +10445,6 @@ class Request {
 				// in order to support Node.js' Url objects; though WHATWG's URL objects
 				// will fall into this branch also (since their `toString()` will return
 				// `href` property anyway)
-<<<<<<< HEAD
 				parsedURL = parseURL(input.href);
 			} else {
 				// coerce input to a string before attempting to parse
@@ -10506,16 +10453,6 @@ class Request {
 			input = {};
 		} else {
 			parsedURL = parseURL(input.url);
-=======
-				parsedURL = parse_url(input.href);
-			} else {
-				// coerce input to a string before attempting to parse
-				parsedURL = parse_url(`${input}`);
-			}
-			input = {};
-		} else {
-			parsedURL = parse_url(input.url);
->>>>>>> 4f12142 (Updated build dir)
 		}
 
 		let method = init.method || input.method || 'GET';
@@ -10709,7 +10646,6 @@ AbortError.prototype = Object.create(Error.prototype);
 AbortError.prototype.constructor = AbortError;
 AbortError.prototype.name = 'AbortError';
 
-<<<<<<< HEAD
 const URL$1 = Url.URL || whatwgUrl.URL;
 
 // fix an issue where "PassThrough", "resolve" aren't a named export for node <10
@@ -10735,11 +10671,6 @@ const isSameProtocol = function isSameProtocol(destination, original) {
 
 	return orig === dest;
 };
-=======
-// fix an issue where "PassThrough", "resolve" aren't a named export for node <10
-const PassThrough$1 = Stream.PassThrough;
-const resolve_url = Url.resolve;
->>>>>>> 4f12142 (Updated build dir)
 
 /**
  * Fetch function
@@ -10772,11 +10703,7 @@ function fetch(url, opts) {
 			let error = new AbortError('The user aborted a request.');
 			reject(error);
 			if (request.body && request.body instanceof Stream.Readable) {
-<<<<<<< HEAD
 				destroyStream(request.body, error);
-=======
-				request.body.destroy(error);
->>>>>>> 4f12142 (Updated build dir)
 			}
 			if (!response || !response.body) return;
 			response.body.emit('error', error);
@@ -10817,7 +10744,6 @@ function fetch(url, opts) {
 
 		req.on('error', function (err) {
 			reject(new FetchError(`request to ${request.url} failed, reason: ${err.message}`, 'system', err));
-<<<<<<< HEAD
 
 			if (response && response.body) {
 				destroyStream(response.body, err);
@@ -10855,11 +10781,6 @@ function fetch(url, opts) {
 			});
 		}
 
-=======
-			finalize();
-		});
-
->>>>>>> 4f12142 (Updated build dir)
 		req.on('response', function (res) {
 			clearTimeout(reqTimeout);
 
@@ -10871,7 +10792,6 @@ function fetch(url, opts) {
 				const location = headers.get('Location');
 
 				// HTTP fetch step 5.3
-<<<<<<< HEAD
 				let locationURL = null;
 				try {
 					locationURL = location === null ? null : new URL$1(location, request.url).toString();
@@ -10885,9 +10805,6 @@ function fetch(url, opts) {
 						return;
 					}
 				}
-=======
-				const locationURL = location === null ? null : resolve_url(request.url, location);
->>>>>>> 4f12142 (Updated build dir)
 
 				// HTTP fetch step 5.5
 				switch (request.redirect) {
@@ -10935,15 +10852,12 @@ function fetch(url, opts) {
 							size: request.size
 						};
 
-<<<<<<< HEAD
 						if (!isDomainOrSubdomain(request.url, locationURL) || !isSameProtocol(request.url, locationURL)) {
 							for (const name of ['authorization', 'www-authenticate', 'cookie', 'cookie2']) {
 								requestOpts.headers.delete(name);
 							}
 						}
 
-=======
->>>>>>> 4f12142 (Updated build dir)
 						// HTTP-redirect fetch step 9
 						if (res.statusCode !== 303 && request.body && getTotalBytes(request) === null) {
 							reject(new FetchError('Cannot follow redirect with body being a readable stream', 'unsupported-redirect'));
@@ -11031,7 +10945,6 @@ function fetch(url, opts) {
 					response = new Response(body, response_options);
 					resolve(response);
 				});
-<<<<<<< HEAD
 				raw.on('end', function () {
 					// some old IIS servers return zero-length OK deflate responses, so 'data' is never emitted.
 					if (!response) {
@@ -11039,8 +10952,6 @@ function fetch(url, opts) {
 						resolve(response);
 					}
 				});
-=======
->>>>>>> 4f12142 (Updated build dir)
 				return;
 			}
 
@@ -11060,7 +10971,6 @@ function fetch(url, opts) {
 		writeToStream(req, request);
 	});
 }
-<<<<<<< HEAD
 function fixResponseChunkedTransferBadEnding(request, errorCallback) {
 	let socket;
 
@@ -11096,8 +11006,6 @@ function destroyStream(stream, err) {
 	}
 }
 
-=======
->>>>>>> 4f12142 (Updated build dir)
 /**
  * Redirect code matching
  *
@@ -11113,11 +11021,7 @@ fetch.Promise = global.Promise;
 
 module.exports = exports = fetch;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-<<<<<<< HEAD
 exports["default"] = exports;
-=======
-exports.default = exports;
->>>>>>> 4f12142 (Updated build dir)
 exports.Headers = Headers;
 exports.Request = Request;
 exports.Response = Response;
@@ -13271,7 +13175,6 @@ exports.wrapOutput = (input, state = {}, options = {}) => {
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ 4256:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -13473,8 +13376,6 @@ module.exports.PROCESSING_OPTIONS = PROCESSING_OPTIONS;
 
 /***/ }),
 
-=======
->>>>>>> 4f12142 (Updated build dir)
 /***/ 4294:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -13489,7 +13390,6 @@ module.exports = __nccwpck_require__(4219);
 "use strict";
 
 
-<<<<<<< HEAD
 var net = __nccwpck_require__(1808);
 var tls = __nccwpck_require__(4404);
 var http = __nccwpck_require__(3685);
@@ -13497,15 +13397,6 @@ var https = __nccwpck_require__(5687);
 var events = __nccwpck_require__(2361);
 var assert = __nccwpck_require__(9491);
 var util = __nccwpck_require__(3837);
-=======
-var net = __nccwpck_require__(1631);
-var tls = __nccwpck_require__(4016);
-var http = __nccwpck_require__(8605);
-var https = __nccwpck_require__(7211);
-var events = __nccwpck_require__(8614);
-var assert = __nccwpck_require__(2357);
-var util = __nccwpck_require__(1669);
->>>>>>> 4f12142 (Updated build dir)
 
 
 exports.httpOverHttp = httpOverHttp;
@@ -13791,7 +13682,6 @@ exports.getUserAgent = getUserAgent;
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ 5840:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -16399,8 +16289,6 @@ module.exports.implForWrapper = function (wrapper) {
 
 /***/ }),
 
-=======
->>>>>>> 4f12142 (Updated build dir)
 /***/ 2940:
 /***/ ((module) => {
 
@@ -16482,162 +16370,6 @@ module.exports = fetchLabels;
 
 /***/ }),
 
-<<<<<<< HEAD
-=======
-/***/ 1713:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const core = __nccwpck_require__( 2186 );
-const fs = __nccwpck_require__( 5747 );
-const yaml = __nccwpck_require__( 1917 );
-
-const reporter = __nccwpck_require__( 3719 );
-const Requirement = __nccwpck_require__( 2720 );
-
-/**
- * Load the requirements yaml file.
- *
- * @returns {Requirement[]} Requirements.
- */
-async function getRequirements() {
-	let reqirementsString = core.getInput( 'requirements' );
-
-	if ( ! reqirementsString ) {
-		const filename = core.getInput( 'requirements-file' );
-		if ( ! filename ) {
-			throw new reporter.ReportError(
-				'Requirements are not found',
-				new Error( 'Either `requirements` or `requirements-file` input is required' ),
-				{}
-			);
-		}
-
-		try {
-			reqirementsString = fs.readFileSync( filename, 'utf8' );
-		} catch ( error ) {
-			throw new reporter.ReportError(
-				`Requirements file ${ filename } could not be read`,
-				error,
-				{}
-			);
-		}
-	} else if ( core.getInput( 'requirements-file' ) ) {
-		core.warning( 'Ignoring input `requirements-file` because `requirements` was given' );
-	}
-
-	try {
-		const requirements = yaml.load( reqirementsString, {
-			onWarning: w => core.warning( `Yaml: ${ w.message }` ),
-		} );
-		if ( ! Array.isArray( requirements ) ) {
-			throw new Error( 'Requirements file does not contain an array' );
-		}
-
-		return requirements.map( ( r, i ) => new Requirement( { name: `#${ i }`, ...r } ) );
-	} catch ( error ) {
-		error[ Symbol.toStringTag ] = 'Error'; // Work around weird check in WError.
-		throw new reporter.ReportError( 'Requirements are not valid', error, {} );
-	}
-}
-
-async function getLabelsToSkipCheck() {
-	let labelsString = core.getInput( 'skipOnLabels' );
-
-	try {
-		const labels = yaml.load(labelsString, {
-			onWarning: w => core.warning( `Yaml: ${ w.message }` ),
-		} );
-
-		return labels || [];
-	} catch ( error ) {
-		error[ Symbol.toStringTag ] = 'Error'; // Work around weird check in WError.
-		throw new reporter.ReportError( 'Labels are not valid', error, {} );
-	}
-}
-
-/**
- * Action entry point.
- */
-async function main() {
-	try {
-		const labelsToSkipCheck = await getLabelsToSkipCheck();
-		core.startGroup( `Loaded ${ labelsToSkipCheck.length } labels to skip check` );
-
-		const requirements = await getRequirements();
-		core.startGroup( `Loaded ${ requirements.length } review requirement(s)` );
-
-		const reviewers = await __nccwpck_require__( 6559 )();
-		core.startGroup( `Found ${ reviewers.length } reviewer(s)` );
-		reviewers.forEach( r => core.info( r ) );
-		core.endGroup();
-
-		const paths = await __nccwpck_require__( 2603 )();
-		core.startGroup( `PR affects ${ paths.length } file(s)` );
-		paths.forEach( p => core.info( p ) );
-		core.endGroup();
-
-		const labels = await __nccwpck_require__(9234)();
-		core.startGroup( `Found ${ labels.length } label(s)` );
-		labels.forEach( r => core.info( r ) );
-		core.endGroup();
-
-		const shouldSkipCheck = labelsToSkipCheck.some(label => labels.includes(label))
-
-		if (shouldSkipCheck) {
-			await reporter.status( reporter.STATE_SUCCESS, `Skipped as '${labelsToSkipCheck.join(',')}' label(s) set` );
-			return;
-		}
-
-		const matchedPaths = [];
-		let ok = true;
-		for ( let i = 0; i < requirements.length; i++ ) {
-			const r = requirements[ i ];
-			core.startGroup( `Checking requirement "${ r.name }"...` );
-			if ( ! r.appliesToPaths( paths, matchedPaths ) ) {
-				core.endGroup();
-				core.info( `Requirement "${ r.name }" does not apply to any files in this PR.` );
-			} else if ( await r.isSatisfied( reviewers ) ) {
-				core.endGroup();
-				core.info( `Requirement "${ r.name }" is satisfied by the existing reviews.` );
-			} else {
-				ok = false;
-				core.endGroup();
-				core.error( `Requirement "${ r.name }" is not satisfied by the existing reviews.` );
-			}
-		}
-		if ( ok ) {
-			await reporter.status( reporter.STATE_SUCCESS, 'All required reviews have been provided!' );
-		} else {
-			await reporter.status(
-				reporter.STATE_PENDING,
-				reviewers.length ? 'Awaiting more reviews...' : 'Awaiting reviews...'
-			);
-		}
-	} catch ( error ) {
-		let err, state, description;
-		if ( error instanceof reporter.ReportError ) {
-			err = error.cause();
-			state = reporter.STATE_FAILURE;
-			description = error.message;
-		} else {
-			err = error;
-			state = reporter.STATE_ERROR;
-			description = 'Action encountered an error';
-		}
-		core.setFailed( err.message );
-		core.info( err.stack );
-		if ( core.getInput( 'token' ) && core.getInput( 'status' ) ) {
-			await reporter.status( state, description );
-		}
-	}
-}
-
-main();
-
-
-/***/ }),
-
->>>>>>> 44e2b37 (Updated build)
 /***/ 2603:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -17388,7 +17120,7 @@ async function main() {
 		const shouldSkipCheck = labelsToSkipCheck.some(label => labels.includes(label))
 
 		if (shouldSkipCheck) {
-			await reporter.status( reporter.STATE_SUCCESS, `Skipped as ${labelsToSkipCheck.join(',')} labels found` );
+			await reporter.status( reporter.STATE_SUCCESS, `Skipped as '${labelsToSkipCheck.join(',')}' label(s) set` );
 			return;
 		}
 
